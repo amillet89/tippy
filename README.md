@@ -27,7 +27,7 @@ WIP :)
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/amillet89/tippy/blob/master/Tippy.gif' title='Video Walkthrough' width='200px' height='300px' alt='Video Walkthrough' />
+<img src='https://github.com/amillet89/tippy/blob/master/Tippy.gif' title='Video Walkthrough' width='' height='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
