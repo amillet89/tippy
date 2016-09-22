@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipControl: UISegmentedControl!
     @IBOutlet weak var tipBar: UIView!
     @IBOutlet weak var tipActiveBar: UIView!
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,6 @@ class ViewController: UIViewController {
         calculateTip()
     }
     
-    
     @IBAction func startBillEdit(_ sender: AnyObject) {
         changeBarColor(firstColor: 1, secondColor: 0)
     }
@@ -49,7 +49,13 @@ class ViewController: UIViewController {
             self.tipBar.alpha = CGFloat(firstColor)
             self.tipActiveBar.alpha = CGFloat(secondColor)
         })
-        
+    }
+    
+    func formatTip(value: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale.current
+        return formatter.string(from: NSNumber(value: value))!
     }
     
     func calculateTip() {
@@ -59,17 +65,21 @@ class ViewController: UIViewController {
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         let total = bill + tip
         
-        tipLabel.text = String(format: "$%.2f", tip)
-        totalLabel.text = String(format: "$%.2f",total)
+        tipLabel.text = formatTip(value: tip) //String(format: "$%.2f", tip)
+        totalLabel.text = formatTip(value: total) //String(format: "$%.2f",total)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        billField.becomeFirstResponder()
         
-        let defaults = UserDefaults.standard
         let tipIndex = defaults.integer(forKey: "tipIndex")
-        
         tipControl.selectedSegmentIndex = tipIndex
+        
+        if let storedBill = defaults.string(forKey: "storedBill") {
+            billField.text = storedBill
+        }
+        
         calculateTip()
     }
     
@@ -79,10 +89,13 @@ class ViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        defaults.set(billField.text!, forKey: "storedBill")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
     }
     
 }
