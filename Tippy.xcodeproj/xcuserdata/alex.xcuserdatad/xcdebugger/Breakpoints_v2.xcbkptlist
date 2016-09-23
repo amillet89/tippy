@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tippy/TipViewController.swift"
-            timestampString = "496220859.838449"
+            timestampString = "496307236.535491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "calculateTip()"
             landmarkType = "7">
          </BreakpointContent>

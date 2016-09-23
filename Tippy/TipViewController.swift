@@ -15,8 +15,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tipControl: UISegmentedControl!
     @IBOutlet weak var tipBar: UIView!
-    @IBOutlet weak var tipActiveBar: UIView!
+    @IBOutlet weak var totalsBar: UIView!
     let defaults = UserDefaults.standard
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,21 +37,6 @@ class ViewController: UIViewController {
         calculateTip()
     }
     
-    @IBAction func startBillEdit(_ sender: AnyObject) {
-        changeBarColor(firstColor: 1, secondColor: 0)
-    }
-    
-    @IBAction func endBillEdit(_ sender: AnyObject) {
-        changeBarColor(firstColor: 1, secondColor: 1)
-    }
-    
-    func changeBarColor(firstColor: Int, secondColor: Int) {
-        UIView.animate(withDuration: 0.4, animations: {
-            self.tipBar.alpha = CGFloat(firstColor)
-            self.tipActiveBar.alpha = CGFloat(secondColor)
-        })
-    }
-    
     func formatTip(value: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
@@ -65,8 +51,8 @@ class ViewController: UIViewController {
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         let total = bill + tip
         
-        tipLabel.text = formatTip(value: tip) //String(format: "$%.2f", tip)
-        totalLabel.text = formatTip(value: total) //String(format: "$%.2f",total)
+        tipLabel.text = formatTip(value: tip)
+        totalLabel.text = formatTip(value: total)
     }
     
     override func viewWillAppear(_ animated: Bool) {
