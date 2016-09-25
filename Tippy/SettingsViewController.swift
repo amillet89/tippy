@@ -10,7 +10,13 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    @IBOutlet weak var themeSwitch: UISwitch!
     @IBOutlet weak var tipControl: UISegmentedControl!
+    @IBOutlet weak var settingsView: UIView!
+    @IBOutlet weak var themeLabel: UILabel!
+    @IBOutlet weak var tipControlLabel: UILabel!
+    
+     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,18 +32,56 @@ class SettingsViewController: UIViewController {
     @IBAction func setDefault(_ sender: AnyObject) {
         let tipIndex = tipControl.selectedSegmentIndex
         
-        let defaults = UserDefaults.standard
         defaults.set(tipIndex, forKey: "tipIndex")
         defaults.synchronize()
     }
     
+    @IBAction func themeSwitch(_ sender: AnyObject) {
+        let isLightTheme = themeSwitch.isOn
+        
+        defaults.set(isLightTheme, forKey: "isLightTheme")
+        defaults.synchronize()
+        setTheme()
+    }
+    
+    func setTheme () {
+        var backgroundColor = UInt(0x59134E)
+        var mainColor = UInt(0xE866E8)
+        let isLightTheme = defaults.bool(forKey: "isLightTheme")
+        
+        if (isLightTheme) {
+            backgroundColor = UInt(0xFCF9FD)
+            mainColor = UInt(0x5F64E5)
+        }
+        
+        settingsView.backgroundColor = UIColorFromRGB(rgbValue: backgroundColor)
+        tipControl.tintColor = UIColorFromRGB(rgbValue: mainColor)
+        themeSwitch.onTintColor = UIColorFromRGB(rgbValue: mainColor)
+        themeLabel.textColor = UIColorFromRGB(rgbValue: mainColor)
+        tipControlLabel.textColor = UIColorFromRGB(rgbValue: mainColor)
+    }
+    
+    
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let isLightTheme = defaults.bool(forKey: "isLightTheme")
+        themeSwitch.isOn = isLightTheme
+        setTheme()
         
-        let defaults = UserDefaults.standard
         let tipIndex = defaults.integer(forKey: "tipIndex")
         
         tipControl.selectedSegmentIndex = tipIndex
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

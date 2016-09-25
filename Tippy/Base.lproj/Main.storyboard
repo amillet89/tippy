@@ -103,8 +103,10 @@
                         <outlet property="billField" destination="PsH-pt-Bhg" id="69n-rO-fhQ"/>
                         <outlet property="tipBar" destination="6vb-qk-3BR" id="yTz-Vb-qYa"/>
                         <outlet property="tipControl" destination="8s7-Nd-2KU" id="bGj-sk-OcZ"/>
-                        <outlet property="tipLabel" destination="dbh-2P-MVr" id="bfC-Pz-YyB"/>
-                        <outlet property="totalLabel" destination="nO0-48-VJ8" id="UHA-1R-68q"/>
+                        <outlet property="tipField" destination="dbh-2P-MVr" id="AnF-OE-0fz"/>
+                        <outlet property="tipLabel" destination="4Qx-n8-wFf" id="pHW-hh-lib"/>
+                        <outlet property="totalField" destination="nO0-48-VJ8" id="JQu-vr-dKf"/>
+                        <outlet property="totalLabel" destination="vH7-4q-e6i" id="5ok-0o-5Qo"/>
                         <outlet property="totalsBar" destination="fAv-Ov-t6k" id="cvt-eq-sTL"/>
                     </connections>
                 </viewController>
@@ -141,27 +143,45 @@
                                             <segment title="20%"/>
                                             <segment title="25%"/>
                                         </segments>
-                                        <color key="tintColor" red="0.90946429967880249" green="0.3994452953338623" blue="0.91132897138595581" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" red="0.90980392156862744" green="0.40000000000000002" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="setDefault:" destination="bmZ-O2-Fgi" eventType="valueChanged" id="P56-sG-je3"/>
                                         </connections>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Default Tip %" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YD1-Vo-BVu">
-                                        <frame key="frameInset" minX="33" minY="35" width="107" height="21"/>
+                                        <frame key="frameInset" minX="33" minY="35" width="122" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" red="0.90978676080703735" green="0.35645091533660889" blue="0.91173040866851807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Light Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ENB-vt-qnV">
+                                        <frame key="frameInset" minX="33" minY="159" width="130" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="0.90978676079999998" green="0.3564509153" blue="0.91173040869999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Rs5-m6-upR">
+                                        <frame key="frameInset" minX="171" minY="159" width="51" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="themeSwitch:" destination="bmZ-O2-Fgi" eventType="valueChanged" id="muf-kt-pz6"/>
+                                        </connections>
+                                    </switch>
                                 </subviews>
-                                <color key="backgroundColor" red="0.3487587571144104" green="0.073857657611370087" blue="0.30524563789367676" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.34901960784313724" green="0.074509803921568626" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="t8v-EE-2KJ"/>
                     <connections>
+                        <outlet property="settingsView" destination="UsF-EH-VX1" id="aIp-nj-Wkm"/>
+                        <outlet property="themeLabel" destination="ENB-vt-qnV" id="5m6-cc-N3D"/>
+                        <outlet property="themeSwitch" destination="Rs5-m6-upR" id="aZg-Ya-bC0"/>
                         <outlet property="tipControl" destination="Gyd-yD-h8S" id="iQv-b6-JZv"/>
+                        <outlet property="tipControlLabel" destination="YD1-Vo-BVu" id="6jf-SN-Aca"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ni2-HA-5Sd" userLabel="First Responder" sceneMemberID="firstResponder"/>

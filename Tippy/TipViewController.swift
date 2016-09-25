@@ -11,11 +11,14 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var billField: UITextField!
-    @IBOutlet weak var tipLabel: UILabel!
-    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var tipField: UILabel!
+    @IBOutlet weak var totalField: UILabel!
     @IBOutlet weak var tipControl: UISegmentedControl!
     @IBOutlet weak var tipBar: UIView!
     @IBOutlet weak var totalsBar: UIView!
+    @IBOutlet weak var tipLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
+    
     let defaults = UserDefaults.standard
     
     
@@ -51,14 +54,44 @@ class ViewController: UIViewController {
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
         let total = bill + tip
         
-        tipLabel.text = formatTip(value: tip)
-        totalLabel.text = formatTip(value: total)
+        tipField.text = formatTip(value: tip)
+        totalField.text = formatTip(value: total)
+    }
+    
+    func setTheme() {
+        var backgroundColor = UInt(0x59134E)
+        var mainColor = UInt(0xE866E8)
+        let isLightTheme = defaults.bool(forKey: "isLightTheme")
+        
+        if (isLightTheme) {
+            backgroundColor = UInt(0xFCF9FD)
+            mainColor = UInt(0x5F64E5)
+        }
+        
+        billField.textColor = UIColorFromRGB(rgbValue: backgroundColor)
+        tipField.textColor = UIColorFromRGB(rgbValue: mainColor)
+        tipLabel.textColor = UIColorFromRGB(rgbValue: mainColor)
+        totalField.textColor = UIColorFromRGB(rgbValue: mainColor)
+        totalLabel.textColor = UIColorFromRGB(rgbValue: mainColor)
+        tipControl.tintColor = UIColorFromRGB(rgbValue: mainColor)
+        tipBar.backgroundColor = UIColorFromRGB(rgbValue: mainColor)
+        totalsBar.backgroundColor = UIColorFromRGB(rgbValue: backgroundColor)
+        
+    }
+    
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setTheme()
         billField.becomeFirstResponder()
-        
         let tipIndex = defaults.integer(forKey: "tipIndex")
         tipControl.selectedSegmentIndex = tipIndex
         
@@ -67,6 +100,7 @@ class ViewController: UIViewController {
         }
         
         calculateTip()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

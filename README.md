@@ -22,6 +22,7 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 * Added a nicer UI
+* Added another theme to settings
 
 WIP :)
 
